@@ -28,3 +28,19 @@
   content: "";
   padding: 0;
 }
+
+.study-record-row > td, .study-record-row > th {
+  padding: 5px 10px;
+}
+
+.record-row-done {
+  background: green;
+}
+.record-row-low-percent {
+  background: yellow;
+}
+
+.record-row-important {
+  color: red;
+  font-weight: bold;
+}

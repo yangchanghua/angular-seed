@@ -1,0 +1,44 @@
+<div ng-controller="StudyRecordCtrl">
+<h1>My studies {{user.name}}</h1>
+    <div class="study-records-summary">
+        <h3>Summary</h3>
+        <span>Goal: {{studyRecords.goal}}</span>
+        <span>Planned: {{studyRecords.planHours}}</span>
+        <span>Used: {{studyRecords.usedHours}}</span>
+        <span>Progress: {{computeProgress()}}</span>
+        <h6>Progress:</h6>
+        <table class="table">
+            <tr class="study-record-row">
+                <th>Item</th>
+                <th>Expected level</th>
+                <th>Current level</th>
+                <th>Percent</th>
+                <th>Spent</th>
+                <th>Estimation</th>
+                <th>Duration</th>
+                <th>Details</th>
+            </tr>
+            <tr ng-repeat="item in studyRecords.progresses" class="study-record-row"
+                ng-class="{'record-row-done': item.percent == 1, 'record-row-important': item.important,
+                'record-row-low-percent': item.percent < 0.5 }">
+                <td>{{item.item}}</td>
+                <td>{{item.expect}}</td>
+                <td>{{item.now}}</td>
+                <td>{{item.percent | number:2}}</td>
+                <td>{{item.spent}}</td>
+                <td>{{item.estimate| number: 0}}</td>
+                <td>{{item.spent}}</td>
+                <td><a>details</a></td>
+            </tr>
+            <tr>
+                <td>total</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>{{studyRecords.totalPercent() | number: 2}}</td>
+                <td>{{studyRecords.totalSpent() | number:0}}</td>
+                <td>{{studyRecords.totalEstimation() | number: 2}}</td>
+                <td>N/A</td>
+            </tr>
+        </table>
+    </div>
+</div>
