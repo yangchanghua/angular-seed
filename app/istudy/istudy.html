@@ -6,7 +6,8 @@
         <span>Planned: {{studyRecords.planHours}}</span>
         <span>Used: {{studyRecords.usedHours}}</span>
         <span>Progress: {{computeProgress()}}</span>
-        <h6>Progress:</h6>
+        <h6>Progress:  </h6>
+        <h1>Status: show the time line with progress ongoing</h1>
         <table class="table">
             <tr class="study-record-row">
                 <th>Item</th>
@@ -41,4 +42,6 @@
             </tr>
         </table>
     </div>
+    <button type="submit" ng-click="save()">Save</button>
+    <p>{{packageInfo}}</p>
 </div>

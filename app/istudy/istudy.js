@@ -9,7 +9,7 @@ angular.module('myApp.istudy', ['ngRoute'])
         });
     }])
 
-    .controller('StudyRecordCtrl', ['$scope', function ($scope) {
+    .controller('StudyRecordCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.user = {
             name: 'ych'
         };
@@ -36,6 +36,7 @@ angular.module('myApp.istudy', ['ngRoute'])
                 return prev + curr;
             }, 0);
         }
+        
 
         $scope.studyRecords = {
             totalPercent: function () {
@@ -144,6 +145,23 @@ angular.module('myApp.istudy', ['ngRoute'])
         $scope.studyRecords.progresses.forEach(function (v) {
             analyze(v);
         });
+        $scope.save = function () {
+            $http.put('/records.json', $scope.studyRecords).then (function () {
+                console.log('saved');
+            }, function (response) {
+                console.log('save failed: ' + response.data);
+            })
+        }
+
+        function getRecords() {
+            $http.get('/records').then(function (res) {
+                $scope.studyRecords = res.data;
+                
+            }, function (res) {
+                alert('error in loading records' + res.data);
+            });
+        }
+        getRecords();
         console.log($scope.studyRecords.totalEstimation());
     }
     ]);
