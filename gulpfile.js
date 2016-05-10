@@ -2,9 +2,7 @@ var gulp = require('gulp');
 var gls = require('gulp-live-server');
 var browserSync = require('browser-sync');
 
-gulp.task('default', function() {
-	console.log('gulp default task');
-});
+gulp.task('default', ['serve']);
 
 // watch files for changes and reload
 gulp.task('serve', function() {
@@ -19,7 +17,7 @@ gulp.task('serve', function() {
   gulp.watch('api.js', function(){
     server.start.bind(server)();
   });
-  browserSync.watch('api.js').on('change', function(){
+  browserSync.watch(['api.js', 'app/*.js']).on('change', function(){
     setTimeout(function () {
       browserSync.reload();
     }, 1000);

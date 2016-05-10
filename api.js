@@ -1,6 +1,23 @@
 var express = require('express');
+var dataStore = require('./app/data-store.js');
+var bodyParser = require('body-parser');
 var app = express();
 app.use(express.static('app'));
+
+console.dir(dataStore);
+dataStore.query();
+
+app.use(bodyParser.json());
+app.use(function (req, res, next) {
+    console.log("Time: " + Date.now());
+    next();
+    
+});
+
+app.put('/records.json', function (req, res) {
+    console.dir(req.body);
+    dataStore.insertOne(req.body);
+});
 
 app.get('/records', function (req, res) {
     res.type('json');
